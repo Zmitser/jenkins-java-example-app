@@ -505,7 +505,7 @@
                             </platforms>
                         </from>
                         <to>
-                            <image>jenkinsexampleapp:latest</image>
+                            <image>zmitser/my-repo:latest</image>
                         </to>
                         <container>
                             <entrypoint>
