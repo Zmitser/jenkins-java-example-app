@@ -7,12 +7,14 @@ pipeline {
     stage("build"){
       
       steps {
+          
         echo 'Building application ...'
+          
       }
       
     }
     
-      stage("test"){
+    stage("test"){
       
       steps {
         
@@ -22,7 +24,7 @@ pipeline {
       
     }
     
-      stage("deploy"){
+    stage("deploy"){
       
       steps {
         
@@ -33,5 +35,21 @@ pipeline {
     }
     
   }
+    
+    post {
+        
+        always {
+            
+        }
+        
+        success {
+            
+        }
+        
+        failure {
+            
+        }
+        
+    }
   
 }
