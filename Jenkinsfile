@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
 
     agent any
@@ -7,28 +9,33 @@ pipeline {
     }
 
     stages {
+
+        stage("init scripts") {
+            steps {
+                script {
+                    gv = load 'script.groovy'
+                }
+            }
+        }
+        
         stage("build jar") {
             steps {
                 script {
-                    echo "Building application"
-                    sh 'mvn package'
+                    gv.buildJar()
                 }
             }
         }
         stage("build image") {
             steps {
-                echo "Building the docker image"
-                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                    sh 'mvn -Pprod jib:dockerBuild -Dimage=zmitser/my-repo:1.0'
-                    sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "docker push zmitser/my-repo:1.0"
+                script {
+                    gv.buildImage()
                 }
+          
             }
         }
         stage("deploy image") {
             steps {
                 echo "Deploying image to the Nexus repository"
-
             }
         }
     }
