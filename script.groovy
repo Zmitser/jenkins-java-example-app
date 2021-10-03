@@ -1,16 +1,15 @@
-def buildApp (version){
-    echo 'Building application ...'
-    echo "Building version ${version}"
+def buildJar (){
+    echo "Building application"
+    sh 'mvn package'
 }
 
-def testApp (credentials) {
-    echo 'Testing application...'
-    echo "Deploying with ${credentials}"
-}
-
-def deployApp(paramVersion){
-    echo 'Deploying application...'
-    echo "Deploying version ${paramVersion}"
+def buildImage () {
+    echo "Building the docker image"
+    withCredentials([usernamePassword(credentials: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+        sh 'mvn -Pprod jib:dockerBuild -Dimage=zmitser/my-repo:1.0'
+        sh "echo $PASS | docker login -u $USER --password-stdin"
+        sh "docker push zmitser/my-repo:1.0"
+    }
 }
 
 return this
