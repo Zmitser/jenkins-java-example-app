@@ -23,7 +23,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    buildImage()
+                    buildImage "zmitser/my-repo:2.0"
                 }
 
             }
