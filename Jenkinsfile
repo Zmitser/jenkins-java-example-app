@@ -1,4 +1,7 @@
-def gv
+#!/usr/bin/env groovy
+
+
+@Library("jenkins-shared-library")_
 
 pipeline {
 
@@ -10,27 +13,19 @@ pipeline {
 
     stages {
 
-        stage("init scripts") {
-            steps {
-                script {
-                    gv = load 'script.groovy'
-                }
-            }
-        }
-        
         stage("build jar") {
             steps {
                 script {
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    gv.buildImage()
+                    buildImage()
                 }
-          
+
             }
         }
         stage("deploy image") {
