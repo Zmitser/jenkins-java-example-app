@@ -7,7 +7,7 @@
 
     <groupId>com.mycompany.myapp</groupId>
     <artifactId>jenkins-example-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <name>Jenkins Example App</name>
 
