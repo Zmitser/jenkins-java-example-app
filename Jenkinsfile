@@ -44,7 +44,13 @@ pipeline {
             }
         }
         stage("deploy image") {
-            steps {
+           steps {
+                script {
+                    def dockerCmd = "docker run -p 8080:8081 -d ${env.IMAGE_NAME}"
+                    sshagent(['ec2-server']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.122.254.206 ${dockerCmd}"
+                   }
+                }
                 echo "Deploying image to the Nexus repository"
             }
         }
