@@ -59,7 +59,7 @@ pipeline {
          
             steps{
                 script {
-                  withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                  withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
                       sh "git remote set-url origin https://${USER}:${PASS}@github.com/Zmitser/jenkins-java-example-app.git"
                       sh 'git add .'
                       sh 'git commit -m "ci: version bump"'
