@@ -62,7 +62,7 @@ pipeline {
                   withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
                       sh "git config user.email jenkins@gmail.com"
                       sh "git config user.name jenkins"
-                      sh "git remote set-url origin https://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@github.com/${USER}/jenkins-java-example-app.git"
+                      sh "git remote set-url origin https://${USER}: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@github.com/${USER}/jenkins-java-example-app.git"
                       sh 'git add .'
                       sh 'git commit -m "ci: version bump"'
                       sh 'git push origin HEAD:jenkins-shared-library'
