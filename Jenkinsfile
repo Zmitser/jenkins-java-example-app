@@ -60,7 +60,10 @@ pipeline {
             steps{
                 script {
                   withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                      sh "git remote set-url origin https://${USER}:${PASS}@github.com/Zmitser/jenkins-java-example-app.git"
+                      def encodedPassword = URLEncoder.encode("$PASS",'UTF-8')
+                      sh "git config user.email jenkins@gmail.com"
+                      sh "git config user.name jenkins"
+                      sh "git remote set-url origin https://${USER}:${encodedPassword}@github.com/${USER}/jenkins-java-example-app.git"
                       sh 'git add .'
                       sh 'git commit -m "ci: version bump"'
                       sh 'git push origin HEAD:jenkins-shared-library'
