@@ -60,7 +60,7 @@ pipeline {
             steps{
                 script {
                   withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                      sh "git remove set-url origin https://${USER}:${PASS}@github.com/Zmitser/jenkins-java-example-app.git"
+                      sh "git remote set-url origin https://${USER}:${PASS}@github.com/Zmitser/jenkins-java-example-app.git"
                       sh 'git add .'
                       sh 'git commit -m "ci: version bump"'
                       sh 'git push origin HEAD:jenkins-shared-library'
